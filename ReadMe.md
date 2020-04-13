@@ -79,10 +79,12 @@ py -3.7 manual_control.py
 
 다음으로, 우리는 몇 가지를 더 import 할 것이다:
 
->import random  
->import time  
->import numpy as np  
->import cv2  
+```python
+import random  
+import time  
+import numpy as np  
+import cv2 
+```
 
 필요하다면 아래 패키지도 설치해준다.
 > pip install opencv-python  
