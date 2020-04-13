@@ -83,3 +83,7 @@ py -3.7 manual_control.py
 >import time  
 >import numpy as np  
 >import cv2  
+
+필요하다면 아래 패키지도 설치해준다.
+> pip install opencv-python  
+> pip install numpy  
