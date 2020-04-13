@@ -18,7 +18,7 @@ CARLA의 주요한 기능들을 다음과 같습니다.
 
 
 
-##Introduction - Self-driving cars with Carla and Python part 1
+#Introduction - Self-driving cars with Carla and Python part 1
 
 안녕하십니까, Carla를 다루는 튜토리얼 시리즈에 오신 것을 환영합니다, Carla는 Python API와 함께 제공되는 오픈소스 자율주행 환경입니다.
 칼라의 주된 생각은 환경(서버)과 에이전트(클라이언트)를 갖는 것이다. 이 서버/클라이언트 아키텍처는 물론 서버와 클라이언트를 동일한 시스템에서 로컬로 실행할 수 있지만, 하나의 시스템에서 환경(서버)을 실행하고 다른 여러 시스템에서 여러 클라이언트를 실행할 수도 있다는 것을 의미하는데, 이것은 꽤 멋진 것 같습니다.
@@ -46,3 +46,31 @@ py -3.7 manual_control.py
 이렇게 하면 클라이언트/서버가 별도로 있으므로 다른 창이 생성된다. 지금 보시는 것은 Python API로 우리가 할 수 있는 일의 예 입니다. 여기서 당신은 WASD 키로 자동차를 제어할 수 있으며, Q는 역방향으로 혹은 역방향으로 바뀔 것이다.
 
 물론, 이 안에서 수동 운전을 하는 것은 사실 우리가 여기 온 목적이 아니다. 내 목표는 파이썬이 운전하게 놔두는 거야! 시작하려면 다음 튜토리얼의 주제가 될 파이썬 API의 실제 작동 방식을 이해해야 한다.
+
+
+
+
+# Controlling the Car and getting sensor data - Self-driving cars with Carla and Python part 2
+
+이번 절에서는  CARLA의 Python API를 소개하고자 한다.
+
+시작하자면 CARLA에는 여러 종류의 물체가 있다. 첫째, 당신은 당연히 "world"을 가지고 있다. 이것은 시뮬레이션 환경 전체를 가리킨다. 그리고, 이 시뮬레이션 환경에는 Actor들이 있다. Actor들은 당신의 차, 당신의 차에 달린 센서, 보행자 등과 같은 것들이다. 그리고 Blueprint가 있다. Blueprint는 actor들의 속성이다.
+
+이 정보로 실제 코드를 작성해 보자. 우선, 그냥 차를 생성해서 앞으로 몰고 가자. 그리고 우리는 일반 RGB 카메라에서 자동차 후드에 놓을 정보를 보고자 한다.
+
+코드의 처음 몇 줄, 예시 디렉토리에 있는 다른 스크립트 중 하나에서 복사하여 붙여넣고, 예시 디렉토리에 이 코드를 쓰려고 한다.
+
+
+>import glob
+>import os
+>import sys
+>
+>try:
+>    sys.path.append(glob.glob('../carla/dist/carla-*%d.%d-%s.egg' % (
+>        sys.version_info.major,
+>        sys.version_info.minor,
+>        'win-amd64' if os.name == 'nt' else 'linux-x86_64'))[0])
+>except IndexError:
+>    pass
+
+import carla
