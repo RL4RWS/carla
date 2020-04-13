@@ -103,3 +103,7 @@ finally:
         actor.destroy()
     print('done.')
 ```
+
+여기, 우리는 try/finally으로 코드의 주요 부분을 캡슐화 할 것이다. 우리는 우리의 모든 논리와 actor의 창조물을 try에 입력하고,  finally 구문에서 그것을 청소할 것이다.
+
+다음으로, 우리는 CARLA에 3가지 주요 "Things"을 가지고 있다는 것을 기억하라: World, Blueprint, 그리고 Actors. 시작하기 위해서, 우리는 우리의 서버에 접속해서 World를 얻은 다음 blueprint에 접근할 것이다.
