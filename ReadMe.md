@@ -73,4 +73,13 @@ py -3.7 manual_control.py
 >except IndexError:  
 >    pass  
   
-import carla  
+>import carla   
+
+위의 코드는 시도/예외 비트를 제외하고 꽤 간단하다. 이 모든 것은 carla egg 파일을 찾는 것이다. 이것이 우리가 carla 패키지 자체에 사용하는 것이다. 실제로 carla를 import하기 위해서는, 우리는 그것을 찾아야 한다. 그리고 그것이 우리가 단지 examples 디렉토리에 우리의 파일을 집어 넣는 이유이기도 하다. 또한 필요한 carla 파일을 Python의 사이트 패키지로 이동하여 이 방법으로도 가져올 수 있다.
+
+다음으로, 우리는 몇 가지를 더 import 할 것이다:
+
+>import random  
+>import time  
+>import numpy as np  
+>import cv2  
