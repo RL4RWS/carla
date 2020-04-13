@@ -18,7 +18,7 @@ CARLA의 주요한 기능들을 다음과 같습니다.
 
 
 
-#Introduction - Self-driving cars with Carla and Python part 1
+# Introduction - Self-driving cars with Carla and Python part 1
 
 안녕하십니까, Carla를 다루는 튜토리얼 시리즈에 오신 것을 환영합니다, Carla는 Python API와 함께 제공되는 오픈소스 자율주행 환경입니다.
 칼라의 주된 생각은 환경(서버)과 에이전트(클라이언트)를 갖는 것이다. 이 서버/클라이언트 아키텍처는 물론 서버와 클라이언트를 동일한 시스템에서 로컬로 실행할 수 있지만, 하나의 시스템에서 환경(서버)을 실행하고 다른 여러 시스템에서 여러 클라이언트를 실행할 수도 있다는 것을 의미하는데, 이것은 꽤 멋진 것 같습니다.
@@ -60,20 +60,21 @@ py -3.7 manual_control.py
 
 코드의 처음 몇 줄, 예시 디렉토리에 있는 다른 스크립트 중 하나에서 복사하여 붙여넣고, 예시 디렉토리에 이 코드를 쓰려고 한다.
 
-
->import glob  
->import os  
->import sys  
->  
->try:  
->    sys.path.append(glob.glob('../carla/dist/carla-*%d.%d-%s.egg' % (  
->        sys.version_info.major,  
->        sys.version_info.minor,  
->        'win-amd64' if os.name == 'nt' else 'linux-x86_64'))[0])  
->except IndexError:  
->    pass  
+```python
+import glob  
+import os  
+import sys  
   
->import carla   
+try:  
+    sys.path.append(glob.glob('../carla/dist/carla-*%d.%d-%s.egg' % (  
+        sys.version_info.major,  
+        sys.version_info.minor,  
+        'win-amd64' if os.name == 'nt' else 'linux-x86_64'))[0])  
+except IndexError:  
+    pass  
+  
+import carla
+```
 
 위의 코드는 시도/예외 비트를 제외하고 꽤 간단하다. 이 모든 것은 carla egg 파일을 찾는 것이다. 이것이 우리가 carla 패키지 자체에 사용하는 것이다. 실제로 carla를 import하기 위해서는, 우리는 그것을 찾아야 한다. 그리고 그것이 우리가 단지 examples 디렉토리에 우리의 파일을 집어 넣는 이유이기도 하다. 또한 필요한 carla 파일을 Python의 사이트 패키지로 이동하여 이 방법으로도 가져올 수 있다.
 
