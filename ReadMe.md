@@ -89,3 +89,14 @@ py -3.7 manual_control.py
 > pip install numpy  
 
 당장 챙겨야 할 첫 번째 일은 Actor의 리스트를 정리하는 것이다. 클라이언트와 서버를 모두 가지고 있음을 기억하십시오. 우리가 서버에서 클라이언트를 실행하기 시작하면, 우리는 서버에 Actor를 만든다. 우리가 그냥 나가버리면, 청소도 하지 않고, 우리 Actor들은 여전히 서버에 있을 것이다.
+```python
+actor_list = []
+try:
+
+finally:
+
+    print('destroying actors')
+    for actor in actor_list:
+        actor.destroy()
+    print('done.')
+```
