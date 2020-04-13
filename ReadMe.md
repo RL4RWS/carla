@@ -61,16 +61,16 @@ py -3.7 manual_control.py
 코드의 처음 몇 줄, 예시 디렉토리에 있는 다른 스크립트 중 하나에서 복사하여 붙여넣고, 예시 디렉토리에 이 코드를 쓰려고 한다.
 
 
->import glob
->import os
->import sys
->
->try:
->    sys.path.append(glob.glob('../carla/dist/carla-*%d.%d-%s.egg' % (
->        sys.version_info.major,
->        sys.version_info.minor,
->        'win-amd64' if os.name == 'nt' else 'linux-x86_64'))[0])
->except IndexError:
->    pass
-
-import carla
+>import glob  
+>import os  
+>import sys  
+>  
+>try:  
+>    sys.path.append(glob.glob('../carla/dist/carla-*%d.%d-%s.egg' % (  
+>        sys.version_info.major,  
+>        sys.version_info.minor,  
+>        'win-amd64' if os.name == 'nt' else 'linux-x86_64'))[0])  
+>except IndexError:  
+>    pass  
+  
+import carla  
