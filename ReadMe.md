@@ -2,11 +2,11 @@ CARLA의 주요한 기능들을 다음과 같습니다.
 - 서버 다중 클라이언트 아키텍처를 통한 확장성: 동일한 노드 또는 다른 노드의 여러 클라이언트가 서로 다른 행위자를 제어할 수 있음
 - 플렉시블 API : CARLA는 Traffic generation, 보행자 행동, 날씨, 센서 등 시뮬레이션과 관련된 모든 측면을 사용자가 제어할 수 있는 강력한 API를 공개한다.
 - 자율주행 센서 제품군: 사용자들은 LIDAR, 다중 카메라, 깊이 센서, GPS 등 다양한 센서 제품군을 구성할 수 있다.
-- 계획 및 제어를 위한 빠른 시뮬레이션: 이 모드는 렌더링을 비활성화하여 그래픽이 필요하>지 >않은 교통 시뮬레이션과 도로 동작을 빠르게 실행할 수 있도록 한다.
+- 계획 및 제어를 위한 빠른 시뮬레이션: 이 모드는 렌더링을 비활성화하여 그래픽이 필요하지 않은 교통 시뮬레이션과 도로 동작을 빠르게 실행할 수 있도록 한다.
 - 지도 생성: 사용자는 RoadRunner와 같은 도구를 통해 OpenDrive 표준에 따라 자신의 지도를 쉽게 만들 수 있다.
 - 트래픽 시나리오 시뮬레이션: 당사 엔진 ScenarioRunner로 사용자는 모듈식 동작에 기반한 다양한 트래픽 상황을 정의하고 실행할 수 있다. 
 - ROS 통합: CARLA는 ROS-Bridge를 통해 ROS와의 통합을 제공 한다.
-- 자율 주행 기준선: 우리는 자율 주행 기준선을 AutoWare 에이전트 및 조건부 모방 학습 에>이전트를 포함하여 칼라에서 실행 가능한 에이전트로 제공한다. 
+- 자율 주행 기준선: 우리는 자율 주행 기준선을 AutoWare 에이전트 및 조건부 모방 학습 에이전트를 포함하여 칼라에서 실행 가능한 에이전트로 제공한다. 
 
   
 # Introduction - Self-driving cars with Carla and Python part 1
@@ -108,3 +108,104 @@ try:
 
     blueprint_library = world.get_blueprint_library()
 ```
+
+```python
+# blueprint : vehicle.tesla.model3
+bp = blueprint_library.filter('model3')[0]
+```
+
+이것은 우리에게 테슬라 모델 3의 기본 blueprint을 제공할 것이다. 설계도를 잡았으니 이 차량을 생성 시킬 수 있을 텐데, 어디서? Carla는 200개의 생성 포인트(spawn point)를 가지고 있어서 무작위로 그 중 하나를 고를 수 있다.
+
+```python
+spawn_point = random.choice(world.get_map().get_spawn_points())
+```
+
+이제 우리는 그 차를 생성할 수 있다. 
+
+```python
+vehicle = world.spawn_actor(bp, spawn_point)
+```
+
+또한 다음과 같은 방법으로 차량을 제어할 수 있다.
+
+```python
+vehicle.apply_control(carla.VehicleControl(throttle=1.0, steer=0.0))
+```
+
+마지막으로 이 차량을 관리하기 위한 Actor 목록에 추가하는 것을 잊지 마십시오.
+
+```python
+actor_list.append(vehicle)
+```
+
+우린 차가 있고 이걸로 달릴 수 있어 5초간 실행한 후 종료하자.
+
+```python
+time.sleep(5)
+```
+
+```python
+
+import glob
+import os
+import sys
+try:
+    sys.path.append(glob.glob('../carla/dist/carla-*%d.%d-%s.egg' % (
+        sys.version_info.major,
+        sys.version_info.minor,
+        'win-amd64' if os.name == 'nt' else 'linux-x86_64'))[0])
+except IndexError:
+    pass
+import carla
+
+import random
+import time
+import numpy as np
+import cv2
+
+im_width = 640
+im_height = 480
+
+
+def process_img(image):
+    i = np.array(image.raw_data)
+    i2 = i.reshape((im_height, im_width, 4))
+    i3 = i2[:, :, :3]
+    cv2.imshow("", i3)
+    cv2.waitKey(1)
+    return i3/255.0
+
+
+actor_list = []
+try:
+    client = carla.Client('localhost', 2000)
+    client.set_timeout(2.0)
+
+    world = client.get_world()
+
+    blueprint_library = world.get_blueprint_library()
+
+    bp = blueprint_library.filter('model3')[0]
+    print(bp)
+
+    spawn_point = random.choice(world.get_map().get_spawn_points())
+
+    vehicle = world.spawn_actor(bp, spawn_point)
+    vehicle.apply_control(carla.VehicleControl(throttle=1.0, steer=0.0))
+    actor_list.append(vehicle)
+
+    # sleep for 5 seconds, then finish:
+    time.sleep(5)
+
+finally:
+
+    print('destroying actors')
+    for actor in actor_list:
+        actor.destroy()
+    print('done.')
+```
+
+
+
+
+
