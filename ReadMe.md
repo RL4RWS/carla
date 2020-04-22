@@ -12,8 +12,7 @@ CARLA의 주요한 기능들을 다음과 같습니다.
 - 자율 주행 기준선: 우리는 자율 주행 기준선을 AutoWare 에이전트 및 조건부 모방 학습 에이전트를 포함하여 칼라에서 실행 가능한 에이전트로 제공한다.
 
 
-문서페이지
-https://github.com/RL4RWS/carla/wiki  
+문서페이지 : https://github.com/RL4RWS/carla/wiki  
     
       
 
