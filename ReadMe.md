@@ -1,4 +1,4 @@
-#CARLA
+# CARLA
 
 
 CARLA의 주요한 기능들을 다음과 같습니다.
@@ -13,7 +13,7 @@ CARLA의 주요한 기능들을 다음과 같습니다.
   
     
       
-# Introduction - Self-driving cars with Carla and Python part 1
+## Introduction - Self-driving cars with Carla and Python part 1
 
 안녕하십니까, Carla를 다루는 튜토리얼 시리즈에 오신 것을 환영합니다, Carla는 Python API와 함께 제공되는 오픈소스 자율주행 환경입니다.
 칼라의 주된 생각은 환경(서버)과 에이전트(클라이언트)를 갖는 것이다. 이 서버/클라이언트 아키텍처는 물론 서버와 클라이언트를 동일한 시스템에서 로컬로 실행할 수 있지만, 하나의 시스템에서 환경(서버)을 실행하고 다른 여러 시스템에서 여러 클라이언트를 실행할 수도 있다는 것을 의미하는데, 이것은 꽤 멋진 것 같습니다.
@@ -45,7 +45,7 @@ py -3.7 manual_control.py
 
 
 
-# Controlling the Car and getting sensor data - Self-driving cars with Carla and Python part 2
+## Controlling the Car and getting sensor data - Self-driving cars with Carla and Python part 2
 
 이번 절에서는  CARLA의 Python API를 소개하고자 한다.
 
